@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'VT323';
 }
 body {
   display: flex;
@@ -13,10 +14,10 @@ body {
   background-color: rgb(41, 38, 38);
 }
 #title {
-  font-size: 75px;
+  font-size: 50px;
   color: white;
 }
-#game-board {
+#gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 450px;
@@ -42,7 +43,7 @@ body {
 }
 #restart {
   padding: 20px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 10px;
   color: rgb(41, 38, 38);
   border-style: none;
