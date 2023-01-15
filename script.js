@@ -12,27 +12,24 @@ const Gameboard = (() => {
 
   fieldElements.forEach((ele) =>
     ele.addEventListener('click', (e) => {
-      if (gameController.round >= 10) return;
       let index = Number(e.target.dataset.index);
+      if (gameController.round >= 10 || gameboard[index] !== '') return;
 
-      if (gameboard[index] === '') {
-        if (gameController.round % 2 !== 0) {
-          e.target.textContent = 'X';
-          titleElement.textContent === `Player O's turn`;
-          gameboard[index] === playerX.sign;
-          gameController.round++;
-          console.log(gameboard[index], gameController.round);
-        } else {
-          e.target.textContent = 'O';
-          titleElement.textContent === `Player X's turn`;
-          gameboard[index] === playerO.sign;
-          gameController.round++;
-          console.log(gameboard[index], gameController.round);
-        }
+      if (gameController.round % 2 !== 0) {
+        e.target.textContent = 'X';
+        titleElement.textContent === `Player O's turn`;
+        gameboard[index] === playerX.sign;
+        gameController.round++;
+        console.log(gameboard[index], gameController.round);
+      } else {
+        e.target.textContent = 'O';
+        titleElement.textContent === `Player X's turn`;
+        gameboard[index] === playerO.sign;
+        gameController.round++;
+        console.log(gameboard[index], gameController.round);
       }
     })
   );
-  return { gameboard };
 })();
 
 const gameController = (() => {
