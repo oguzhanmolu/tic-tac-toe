@@ -15,18 +15,17 @@ const Gameboard = (() => {
       let index = Number(e.target.dataset.index);
       if (gameController.round >= 10 || gameboard[index] !== '') return;
 
-      if (gameController.round % 2 !== 0) {
-        e.target.textContent = 'X';
-        titleElement.textContent === `Player O's turn`;
-        gameboard[index] === playerX.sign;
-        gameController.round++;
-        console.log(gameboard[index], gameController.round);
+      gameController.round++;
+      if (gameController.round % 2 == 0) {
+        gameboard[index] = playerX.sign;
+        e.target.textContent = playerX.sign;
+        titleElement.textContent = `Player O's turn`;
+        console.log(gameboard);
       } else {
-        e.target.textContent = 'O';
-        titleElement.textContent === `Player X's turn`;
-        gameboard[index] === playerO.sign;
-        gameController.round++;
-        console.log(gameboard[index], gameController.round);
+        gameboard[index] = playerO.sign;
+        e.target.textContent = playerO.sign;
+        titleElement.textContent = `Player X's turn`;
+        console.log(gameboard);
       }
     })
   );
@@ -34,7 +33,5 @@ const Gameboard = (() => {
 
 const gameController = (() => {
   let round = 1;
-  let gameFinished = false;
-
   return { round };
 })();
