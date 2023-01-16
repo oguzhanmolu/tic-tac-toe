@@ -1,4 +1,5 @@
 'use strict';
+// Everything about display
 const Gameboard = (() => {
   const playerFactory = (sign) => {
     return { sign };
@@ -10,27 +11,27 @@ const Gameboard = (() => {
   const fieldElements = document.querySelectorAll('.field');
   const btnRestart = document.querySelector('#restart');
 
+  // This adds the player marks on field clicks.
   fieldElements.forEach((ele) =>
     ele.addEventListener('click', (e) => {
-      let index = Number(e.target.dataset.index);
-      if (gameController.round >= 10 || gameboard[index] !== '') return;
-
+      if (gameController.round >= 10 || gameboard[e.target.id] !== '') return;
       gameController.round++;
+
       if (gameController.round % 2 == 0) {
-        gameboard[index] = playerX.sign;
+        gameboard[e.target.id] = playerX.sign;
         e.target.textContent = playerX.sign;
         titleElement.textContent = `Player O's turn`;
-        console.log(gameboard);
       } else {
-        gameboard[index] = playerO.sign;
+        gameboard[e.target.id] = playerO.sign;
         e.target.textContent = playerO.sign;
         titleElement.textContent = `Player X's turn`;
-        console.log(gameboard);
       }
+      console.log(gameboard);
     })
   );
 })();
 
+// Everything about game controls
 const gameController = (() => {
   let round = 1;
   return { round };
