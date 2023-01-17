@@ -33,13 +33,13 @@ body {
   color: white;
 }
 .field-top {
-  border-bottom: 5px solid white;
+  border-bottom: 2px solid white;
 }
 .field-left {
-  border-right: 5px solid white;
+  border-right: 2px solid white;
 }
 .field-right {
-  border-left: 5px solid white;
+  border-left: 2px solid white;
 }
 #restart {
   padding: 20px;

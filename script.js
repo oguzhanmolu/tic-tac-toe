@@ -1,9 +1,12 @@
 'use strict';
 // Everything about display
 const Gameboard = (() => {
+  // Player factory
   const playerFactory = (sign) => {
     return { sign };
   };
+
+  // Variables
   const playerX = playerFactory('X');
   const playerO = playerFactory('O');
   let gameboard = ['', '', '', '', '', '', '', '', ''];
@@ -14,10 +17,15 @@ const Gameboard = (() => {
   // All occuring events when fields are clicked.
   fieldElements.forEach((ele) =>
     ele.addEventListener('click', (e) => {
-      if (gameController.round >= 10 || gameboard[e.target.id] !== '') return;
-      gameController.round++;
+      if (
+        gameController.round >= 10 ||
+        gameboard[e.target.id] !== '' ||
+        gameController.isGameOver == true
+      )
+        return;
 
       // This adds the player marks on field clicks.
+      gameController.round++;
       if (gameController.round % 2 == 0) {
         gameboard[e.target.id] = playerX.sign;
         e.target.textContent = playerX.sign;
@@ -31,14 +39,27 @@ const Gameboard = (() => {
     })
   );
 
-  // Restart the game (I could reset every variable, but we don't need any ongoing value for game to continue. So this is way cleaner IMHO)
-  btnRestart.addEventListener('click', () => {
-    window.location.reload();
-  });
+  // Simple reset for the game (Lazy but we don't need save any values anyways for next rounds.)
+  btnRestart.addEventListener('click', () => window.location.reload());
 })();
 
 // Everything about game controls
 const gameController = (() => {
   let round = 1;
-  return { round };
+  let isGameOver = false;
+
+  const checkWinner = () => {
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+  };
+
+  return { round, isGameOver, checkWinner };
 })();
