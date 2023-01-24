@@ -80,6 +80,7 @@ const gameController = (() => {
   let gameRound = 1;
   let isGameOver = false;
 
+  // Round controls
   const playRound = (indexOfField) => {
     gameBoard.setField(indexOfField, getCurrentSign());
     if (checkWinner(indexOfField)) {
@@ -95,12 +96,13 @@ const gameController = (() => {
     gameRound++;
     displayController.setAnnouncementEle(`Player ${getCurrentSign()}'s turn`);
   };
-  //
 
+  // Get current player's sign
   const getCurrentSign = () => {
     return gameRound % 2 === 1 ? playerX.getSign() : playerO.getSign();
   };
 
+  //   Check win condition
   const checkWinner = (indexOfField) => {
     const winConditions = [
       [0, 1, 2],
@@ -113,6 +115,7 @@ const gameController = (() => {
       [2, 4, 6],
     ];
 
+    // Check if there is any match with the winCondition array
     return winConditions
       .filter((combination) => combination.includes(indexOfField))
       .some((combinations) =>
@@ -125,5 +128,6 @@ const gameController = (() => {
   const checkIsGameOver = () => {
     return isGameOver;
   };
+
   return { playRound, checkIsGameOver };
 })();
