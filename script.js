@@ -42,7 +42,7 @@ const displayController = (() => {
       if (gameController.checkIsGameOver() || e.target.textContent !== '')
         return;
 
-      gameController.playRound(parseInt(e.target.id));
+      gameController.playRound(Number(e.target.id));
       updateField();
     })
   );
