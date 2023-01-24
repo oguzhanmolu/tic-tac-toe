@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'VT323';
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -13,10 +15,12 @@ body {
   height: 100vh;
   background-color: rgb(41, 38, 38);
 }
-#title {
+
+#announcement {
   font-size: 50px;
   color: white;
 }
+
 #gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -29,18 +33,21 @@ body {
   width: 150px;
   font-size: 125px;
   text-align: center;
-  cursor: pointer;
   color: white;
+  cursor: pointer;
 }
-.field-top {
+
+/* Borders for game board */
+.bottom {
   border-bottom: 2px solid white;
 }
-.field-left {
+.left {
   border-right: 2px solid white;
 }
-.field-right {
+.right {
   border-left: 2px solid white;
 }
+
 #restart {
   padding: 20px;
   font-size: 1.5rem;
