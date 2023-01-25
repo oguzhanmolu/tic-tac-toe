@@ -36,7 +36,7 @@ const displayController = (() => {
   const messageElement = document.getElementById('message');
   const btnRestart = document.getElementById('restart');
 
-  // Update field if conditions are met
+  // If game is not over, update field text from game board values
   fieldElement.forEach((field) =>
     field.addEventListener('click', (e) => {
       if (gameController.checkIsGameOver() || e.target.textContent !== '')
@@ -47,7 +47,7 @@ const displayController = (() => {
     })
   );
 
-  // Update field function
+  // Update field text
   const updateFieldTextContent = () => {
     for (let i = 0; i < fieldElement.length; i++) {
       fieldElement[i].textContent = gameBoard.getField(i);
@@ -60,12 +60,12 @@ const displayController = (() => {
       ? setMessageTextContent(`It's draw!`)
       : setMessageTextContent(`Player ${value} has won!`);
   };
-
+  // Result message
   const setMessageTextContent = (message) => {
     messageElement.textContent = message;
   };
 
-  // Lazy restart
+  // Lazy restart (Well we don't need to save variables for next rounds anyways)
   btnRestart.addEventListener('click', () => window.location.reload());
 
   return { setResultMessage, setMessageTextContent };
@@ -78,22 +78,26 @@ const gameController = (() => {
   let gameRound = 1;
   let isGameOver = false;
 
-  // Round controls
+  // Round continues as long as there is no winner or draw,
+  // and game board values are updated according to player signs
   const playRound = (fieldIndex) => {
     gameBoard.setField(fieldIndex, getCurrentSign());
 
+    // Win
     if (checkWinner(fieldIndex)) {
       displayController.setResultMessage(getCurrentSign());
       isGameOver = true;
       return;
     }
 
+    // Draw
     if (gameRound === 9) {
       displayController.setResultMessage('Draw');
       isGameOver = true;
       return;
     }
 
+    // Game continues
     gameRound++;
     displayController.setMessageTextContent(
       `Player ${getCurrentSign()}'s turn`
@@ -105,7 +109,7 @@ const gameController = (() => {
     return gameRound % 2 === 1 ? playerX.getSign() : playerO.getSign();
   };
 
-  //   Check win condition
+  //   Check win combinations whether if there is a match or not
   const checkWinner = (fieldIndex) => {
     const winConditions = [
       [0, 1, 2],
@@ -118,7 +122,7 @@ const gameController = (() => {
       [2, 4, 6],
     ];
 
-    // Check if there is any match with the winCondition array
+    // Simply filter and compare game field array with the arrays above
     return winConditions
       .filter((combination) => combination.includes(fieldIndex))
       .some((combinations) =>
@@ -128,6 +132,7 @@ const gameController = (() => {
       );
   };
 
+  // Returns true or false for if statement in line 42
   const checkIsGameOver = () => {
     return isGameOver;
   };
