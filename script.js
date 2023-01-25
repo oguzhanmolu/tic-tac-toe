@@ -32,45 +32,43 @@ const gameBoard = (() => {
 
 // Everything about game display
 const displayController = (() => {
-  const fieldEle = document.querySelectorAll('.field');
-  const announcementEle = document.getElementById('announcement');
+  const fieldElement = document.querySelectorAll('.field');
+  const messageElement = document.getElementById('message');
   const btnRestart = document.getElementById('restart');
 
   // Update field if conditions are met
-  fieldEle.forEach((field) =>
+  fieldElement.forEach((field) =>
     field.addEventListener('click', (e) => {
       if (gameController.checkIsGameOver() || e.target.textContent !== '')
         return;
 
       gameController.playRound(Number(e.target.id));
-      updateField();
+      updateFieldTextContent();
     })
   );
 
   // Update field function
-  const updateField = () => {
-    for (let i = 0; i < fieldEle.length; i++) {
-      fieldEle[i].textContent = gameBoard.getField(i);
+  const updateFieldTextContent = () => {
+    for (let i = 0; i < fieldElement.length; i++) {
+      fieldElement[i].textContent = gameBoard.getField(i);
     }
   };
 
   // Create result announcement
-  const setResultAnnouncement = (winner) => {
-    winner === 'Draw'
-      ? setAnnouncementEle(`It's draw!`)
-      : setAnnouncementEle(`Player ${winner} has won!`);
+  const setResultMessage = (value) => {
+    value === 'Draw'
+      ? setMessageTextContent(`It's draw!`)
+      : setMessageTextContent(`Player ${value} has won!`);
   };
 
-  const setAnnouncementEle = (message) => {
-    announcementEle.textContent = message;
+  const setMessageTextContent = (message) => {
+    messageElement.textContent = message;
   };
 
   // Lazy restart
-  btnRestart.addEventListener('click', () => {
-    window.location.reload();
-  });
+  btnRestart.addEventListener('click', () => window.location.reload());
 
-  return { setResultAnnouncement, setAnnouncementEle };
+  return { setResultMessage, setMessageTextContent };
 })();
 
 // Everything about game controls
@@ -81,20 +79,25 @@ const gameController = (() => {
   let isGameOver = false;
 
   // Round controls
-  const playRound = (indexOfField) => {
-    gameBoard.setField(indexOfField, getCurrentSign());
-    if (checkWinner(indexOfField)) {
-      displayController.setResultAnnouncement(getCurrentSign());
+  const playRound = (fieldIndex) => {
+    gameBoard.setField(fieldIndex, getCurrentSign());
+
+    if (checkWinner(fieldIndex)) {
+      displayController.setResultMessage(getCurrentSign());
       isGameOver = true;
       return;
     }
+
     if (gameRound === 9) {
-      displayController.setResultAnnouncement('Draw');
+      displayController.setResultMessage('Draw');
       isGameOver = true;
       return;
     }
+
     gameRound++;
-    displayController.setAnnouncementEle(`Player ${getCurrentSign()}'s turn`);
+    displayController.setMessageTextContent(
+      `Player ${getCurrentSign()}'s turn`
+    );
   };
 
   // Get current player's sign
@@ -103,7 +106,7 @@ const gameController = (() => {
   };
 
   //   Check win condition
-  const checkWinner = (indexOfField) => {
+  const checkWinner = (fieldIndex) => {
     const winConditions = [
       [0, 1, 2],
       [3, 4, 5],
@@ -117,7 +120,7 @@ const gameController = (() => {
 
     // Check if there is any match with the winCondition array
     return winConditions
-      .filter((combination) => combination.includes(indexOfField))
+      .filter((combination) => combination.includes(fieldIndex))
       .some((combinations) =>
         combinations.every(
           (index) => gameBoard.getField(index) === getCurrentSign()

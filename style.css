@@ -16,12 +16,12 @@ body {
   background-color: rgb(41, 38, 38);
 }
 
-#announcement {
+#message {
   font-size: 50px;
   color: white;
 }
 
-#gameboard {
+#game-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 450px;
@@ -37,7 +37,7 @@ body {
   cursor: pointer;
 }
 
-/* Borders for game board */
+/* Game board design*/
 .bottom {
   border-bottom: 2px solid white;
 }
