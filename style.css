@@ -17,20 +17,20 @@ body {
 }
 
 #message {
-  font-size: 50px;
+  font-size: 75px;
   color: white;
 }
 
 #game-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 450px;
-  width: 450px;
+  height: 675px;
+  width: 675px;
   margin: 0 auto;
 }
 .field {
-  height: 150px;
-  width: 150px;
+  height: 225px;
+  width: 225px;
   font-size: 125px;
   text-align: center;
   color: white;
@@ -48,9 +48,9 @@ body {
   border-left: 2px solid white;
 }
 
-#restart {
-  padding: 20px;
-  font-size: 1.5rem;
+#restart-button {
+  padding: 30px;
+  font-size: 2rem;
   border-radius: 10px;
   color: rgb(41, 38, 38);
   border-style: none;

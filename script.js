@@ -34,7 +34,7 @@ const gameBoard = (() => {
 const displayController = (() => {
   const fieldElement = document.querySelectorAll('.field');
   const messageElement = document.getElementById('message');
-  const btnRestart = document.getElementById('restart');
+  const btnRestart = document.getElementById('restart-button');
 
   // If game is not over, update field text from game board values
   fieldElement.forEach((field) =>
@@ -65,7 +65,7 @@ const displayController = (() => {
     messageElement.textContent = message;
   };
 
-  // Lazy restart (Well we don't need to save variables for next rounds anyways)
+  // Lazy restart (Well, we don't need to save variables for next rounds anyways)
   btnRestart.addEventListener('click', () => window.location.reload());
 
   return { setResultMessage, setMessageTextContent };
@@ -122,7 +122,7 @@ const gameController = (() => {
       [2, 4, 6],
     ];
 
-    // Simply filter and compare game field array with the arrays above
+    // Simply filter and compare game field values with the arrays above
     return winConditions
       .filter((combination) => combination.includes(fieldIndex))
       .some((combinations) =>
