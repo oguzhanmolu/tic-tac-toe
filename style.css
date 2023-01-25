@@ -31,7 +31,7 @@ body {
 .field {
   height: 225px;
   width: 225px;
-  font-size: 125px;
+  font-size: 200px;
   text-align: center;
   color: white;
   cursor: pointer;
@@ -39,13 +39,13 @@ body {
 
 /* Game board design*/
 .bottom {
-  border-bottom: 2px solid white;
+  border-bottom: 5px solid white;
 }
 .left {
-  border-right: 2px solid white;
+  border-right: 5px solid white;
 }
 .right {
-  border-left: 2px solid white;
+  border-left: 5px solid white;
 }
 
 #restart-button {
